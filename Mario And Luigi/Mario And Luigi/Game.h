@@ -32,6 +32,7 @@ private:
 	void setupFontAndText();
 	void setupSprite();
 	void changeCharacterName();
+	void centretext(sf::Text t_text, float t_yCoord);
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_MarioFont; // font used by message

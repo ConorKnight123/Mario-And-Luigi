@@ -160,12 +160,24 @@ void Game::changeCharacterName()
 	if (m_imAMario)
 	{
 		m_CharacterName.setString("Luigi");
+		m_CharacterName.setFillColor(sf::Color(0, 230, 0, 225));
+		m_logoSprite.setTextureRect(sf::IntRect(64, 0, 64, 148));
 	}
 	else
 	{
 		m_CharacterName.setString("Mario");
+		m_CharacterName.setFillColor(sf::Color{ 230,0,0,255 });
+		m_logoSprite.setTextureRect(sf::IntRect(0, 0, 64, 148));
 	}
+	centretext(m_CharacterName, 50.0f);
 	m_imAMario = !m_imAMario;
+}
+void Game::centretext(sf::Text t_text, float t_yCoord)
+{
+	sf::Vector2f location{ 0.0f,0.0f };
+	location.y = t_yCoord;
+	location.x = 400.0f - t_text.getGlobalBounds().width / 2.0f;
+	t_text.setPosition(location);
 }
 /// <summary>
 /// load the texture and setup the sprite for the logo
