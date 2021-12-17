@@ -77,6 +77,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if (sf::Event::KeyReleased == newEvent.type)
+		{
+			processKeyReleases(newEvent);
+		}
 	}
 }
 
@@ -91,6 +95,20 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+	if (sf::Keyboard::Space == t_event.key.code)
+	{
+		if (m_canChange)
+		{
+			changeCharacterName();
+			m_canChange = false;
+		}
+		std::cout << "space" << std::endl;
+	}
+}
+
+void Game::processKeyReleases(sf::Event t_event)
+{
+	m_canChange = true;
 }
 
 /// <summary>
@@ -121,7 +139,7 @@ void Game::render()
 /// </summary>
 void Game::setupFontAndText()
 {
-	if (!m_MarioFont.loadFromFile("ASSETS\\FONTS\\SuperMario256.ttfx"))
+	if (!m_MarioFont.loadFromFile("ASSETS\\FONTS\\SuperMario256.ttf"))
 	{
 		std::cout << "problem loading arial black font" << std::endl;
 	}
@@ -136,6 +154,19 @@ void Game::setupFontAndText()
 
 }
 
+
+void Game::changeCharacterName()
+{
+	if (m_imAMario)
+	{
+		m_CharacterName.setString("Luigi");
+	}
+	else
+	{
+		m_CharacterName.setString("Mario");
+	}
+	m_imAMario = !m_imAMario;
+}
 /// <summary>
 /// load the texture and setup the sprite for the logo
 /// </summary>
@@ -147,5 +178,6 @@ void Game::setupSprite()
 		std::cout << "problem loading logo" << std::endl;
 	}
 	m_logoSprite.setTexture(m_MarioTexture);
+	m_logoSprite.setTextureRect(sf::IntRect(0, 0, 64, 148));
 	m_logoSprite.setPosition(300.0f, 180.0f);
 }

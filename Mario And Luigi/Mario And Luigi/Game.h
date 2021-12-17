@@ -25,11 +25,13 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processKeyReleases(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
 	void setupFontAndText();
 	void setupSprite();
+	void changeCharacterName();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_MarioFont; // font used by message
@@ -37,7 +39,8 @@ private:
 	sf::Texture m_MarioTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
-
+	bool m_imAMario{ true };
+	bool m_canChange{ true };
 };
 
 #endif // !GAME_HPP
